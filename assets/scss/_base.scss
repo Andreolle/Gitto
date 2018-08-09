@@ -4,6 +4,22 @@ body {
 }
 
 .container {
-    max-width: 1280px;
+    max-width: 1680px;
+    display: flex;
+    flex: 1;
     margin: 0 auto;
+}
+
+// Media Queries
+
+@media screen and (min-width: 1481px) {
+    .container {
+        padding: 0 45px;
+    }
+}
+
+@media screen and (max-width: 1480px) {
+    .container {
+        padding: 0 15px;
+    }
 }
