@@ -36,6 +36,42 @@ class Sidebar extends Component {
             <li>Andreolle de Sousa Dantas 1</li>
             <li>Pedro de Sousa Dantas</li>
             <li>Paulo Araujo Dantas</li>
+            <li>Andreolle de Sousa Dantas 1</li>
+            <li>Pedro de Sousa Dantas</li>
+            <li>Paulo Araujo Dantas</li>
+            <li>Andreolle de Sousa Dantas 1</li>
+            <li>Pedro de Sousa Dantas</li>
+            <li>Paulo Araujo Dantas</li>
+            <li>Andreolle de Sousa Dantas 1</li>
+            <li>Pedro de Sousa Dantas</li>
+            <li>Paulo Araujo Dantas</li>
+            <li>Andreolle de Sousa Dantas 1</li>
+            <li>Pedro de Sousa Dantas</li>
+            <li>Paulo Araujo Dantas</li>
+            <li>Andreolle de Sousa Dantas 1</li>
+            <li>Pedro de Sousa Dantas</li>
+            <li>Paulo Araujo Dantas</li>
+            <li>Andreolle de Sousa Dantas 1</li>
+            <li>Pedro de Sousa Dantas</li>
+            <li>Paulo Araujo Dantas</li>
+            <li>Andreolle de Sousa Dantas 1</li>
+            <li>Pedro de Sousa Dantas</li>
+            <li>Paulo Araujo Dantas</li>
+            <li>Andreolle de Sousa Dantas 1</li>
+            <li>Pedro de Sousa Dantas</li>
+            <li>Paulo Araujo Dantas</li>
+            <li>Andreolle de Sousa Dantas 1</li>
+            <li>Pedro de Sousa Dantas</li>
+            <li>Paulo Araujo Dantas</li>
+            <li>Andreolle de Sousa Dantas 1</li>
+            <li>Pedro de Sousa Dantas</li>
+            <li>Paulo Araujo Dantas</li>
+            <li>Andreolle de Sousa Dantas 1</li>
+            <li>Pedro de Sousa Dantas</li>
+            <li>Paulo Araujo Dantas</li>
+            <li>Andreolle de Sousa Dantas 1</li>
+            <li>Pedro de Sousa Dantas</li>
+            <li>Paulo Araujo Dantas</li>
         </ul>
         <div className="sidebar__actionbar">
           <FontAwesomeIcon onClick={this.toggleMenu} className="sidebar__actionbar--toggleButton" icon={faChevronCircleLeft} />
