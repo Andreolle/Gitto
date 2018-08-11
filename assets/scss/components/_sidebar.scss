@@ -1,39 +1,97 @@
 .sidebar {
     display: flex;
-    flex-direction: column;
     flex: 0 0 350px;
+    justify-content: space-between;
+    @include transition(all .3s linear);
+    position: relative;
+    flex-direction: column;
     background: $subablue;
     height: 100vh;
     color: $white;
-    overflow: hidden;
 
     & * {
         display: flex;
         justify-content: flex-end;
     }
 
-    &__header {
-        flex-direction: column;
-        padding: 16px;
-        max-height: 150px;
-        overflow: auto;
-        
-        &--title,
-        &--subtitle {
-            font-weight: 300;
+    &.close {
+        flex: 0 0 65px;
+        padding: 0;
+        .sidebar__header {
+            padding: 0;
+            align-self: center;
+            &--title {
+                width: 0;
+                opacity: 0;
+            }
+            &--avatar {
+                opacity: 1;
+            }
         }
-
-        &--title {
-            font-size: 30px;
+        .sidebar__nav {
+            opacity: 0;
+            width: 0;
+        }
+        .sidebar__actionbar {
+            padding: 16px 20px;
+            &--toggleButton {
+                @include rotate(180deg);
+            }
         }
     }
 
-    &__nav {
-        justify-content: flex-start;
+    &__header {
         flex-direction: column;
+        justify-content: center;
         padding: 16px;
+        height: 180px;
+        overflow: hidden;
+        
+        &--avatar {
+            width: 45px;
+            height: 45px;
+            @include border-radius(50%);
+            border: 2px solid $white;
+            overflow: hidden;
+            position: absolute;
+            left: 50%;
+            opacity: 0;
+            @include transform(translateX(-50%));
+            @include transition(opacity .2s ease);
+            img {
+                width: 100%;
+            }
+        }
+
+        &--title {
+            flex-direction: column;
+            @include transition(all .3s ease);
+            white-space: nowrap;
+            overflow: hidden;
+            width: 325px;
+            opacity: 1;
+            .orgName,
+            .subtitle {
+                font-weight: 300;
+            }
+            .title {
+                font-size: 30px;
+            }
+        }
+
+    }
+
+    &__nav {
+        display: block;
+        padding: 16px;
+        flex: 1;
         height: 100vh;
-        overflow: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
+        @include transition(all .3s ease);
+        opacity: 1;
+        width: 360px;
+        white-space: nowrap;
         li {
             position: relative;
             cursor: pointer;
@@ -41,10 +99,10 @@
             margin: 3px 0;
             align-items: center;
             font-size: 18px;
-            @include transition(all .2s linear);
+            @include transition(all .3s ease);
             &:after {
                 content: '';
-                @include transition(opacity .2s linear);
+                @include transition(all .3s ease);
                 opacity: 0;
                 position: absolute;
                 right: -16px;
@@ -66,5 +124,11 @@
 
     &__actionbar {
         padding: 16px;
+        @include transition(all .3s linear);
+        &--toggleButton {
+            @include transition(transform .3s linear);
+            cursor: pointer;
+            font-size: 25px;
+        }
     }
 }
