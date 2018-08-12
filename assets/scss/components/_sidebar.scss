@@ -112,6 +112,10 @@
             align-items: center;
             font-size: 18px;
             @include transition(all .3s ease);
+            a {
+                color: $white;
+                text-decoration: none;
+            }
             &:after {
                 content: '';
                 @include transition(all .3s ease);

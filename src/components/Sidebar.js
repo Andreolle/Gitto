@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom'
 
 import { listRepos } from '@/services/httpRequests/requests'
 
@@ -12,7 +13,8 @@ class Sidebar extends Component {
     this.state = {
       isOpen: true,
       repos: [],
-      orgName: ''
+      orgName: '',
+      orgAvatar: ''
     }
 
     this.toggleMenu = this.toggleMenu.bind(this);
@@ -22,9 +24,11 @@ class Sidebar extends Component {
     listRepos().then(res => {
       const repos = res.data
       const orgName = res.data[0].owner.login
+      const orgAvatar = res.data[0].owner.avatar_url
       
       this.setState({ repos })
       this.setState({ orgName })
+      this.setState({ orgAvatar })
     })
   }
   
@@ -43,12 +47,16 @@ class Sidebar extends Component {
             <h3 className="subtitle">Projetos</h3>
           </div>
           <div className="sidebar__header--avatar">
-            <img src="https://avatars3.githubusercontent.com/u/19934823?s=200&v=4" alt=""/>
+            <img src={this.state.orgAvatar} alt=""/>
           </div>
         </div>
         <ul className="sidebar__nav">
           {this.state.repos.map(repo =>
-            <li key={ repo.id }>{ repo.name }</li>
+            <li key={ repo.id }>
+              <Link to={{ pathname: `/${ repo.name }` }}>
+                { repo.name }
+              </Link>
+            </li>
           )}
         </ul>
         <div className="sidebar__actionbar">
