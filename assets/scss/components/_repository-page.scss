@@ -1,0 +1,68 @@
+.repository-page {
+    width: 100%;
+    .container {
+        flex-direction: column;
+    }
+    &__header {
+        &--title {
+            padding: 1rem;
+            border-bottom: 1px solid #cccccc;
+            h1 {
+                font-size: 2rem;
+                font-weight: 300;
+            }
+        }
+    }
+
+    &__counter {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        &--item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 16px;
+            .counter {
+                span {
+                    font-size: 1.4rem;
+                    margin-right: 8px;
+                }
+            }
+        }
+    }
+
+    &__body {
+        .commit-list {
+            max-height: calc(100vh - 300px);
+            overflow: auto;
+            border: 1px solid $linegray;
+            border-top: 0;
+        }
+
+        .commit {
+            border-top: 1px solid $linegray;
+            padding: 8px 10px;
+            &:hover {
+                background: $softblue;
+            }
+            &__committer {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                &--avatar {
+                    width: 30px;
+                    height: 30px;;
+                    border: 1px solid green;
+                    margin-right: .5rem;
+                    @include border-radius(3px);
+                    overflow: hidden;
+                    img {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
