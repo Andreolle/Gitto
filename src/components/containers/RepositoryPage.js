@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
-import CounterDisplay from '@/components/counterDisplay'
+import CounterDisplay from '@/components/CounterDisplay'
+import CommitList from '@/components/CommitList'
 
 class RepositoryPage extends Component {
 	render() {
@@ -17,18 +18,7 @@ class RepositoryPage extends Component {
 					</div>
 
 					<div className="repository-page__body">
-						<ul className="commit-list">
-							<li className="commit">
-								<strong>Commit message Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni, quibusdam.</strong>
-
-								<div className="commit__committer">
-									<div className="commit__committer--avatar">
-										<img src="#" alt=""/>
-									</div>
-									<div className="commit__committer--name">Andreolle</div>
-								</div>
-							</li>
-						</ul>
+						<CommitList />
 					</div>
 				</div>
 			</div>
