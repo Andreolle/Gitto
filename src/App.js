@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import Sidebar from './components/Sidebar';
+import RepositoryPage from './components/containers/RepositoryPage';
 
 class App extends Component {
   render() {
     return (
       <div className="app">
         <Sidebar />
-        <div className="container">
-          <h1>Olá meu chapa</h1>
-        </div>
+        <RepositoryPage />
       </div>
     );
   }

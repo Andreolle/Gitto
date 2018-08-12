@@ -67,6 +67,4 @@ class Sidebar extends Component {
   }
 }
 
-Sidebar.propTypes = {};
-
 export default Sidebar;
