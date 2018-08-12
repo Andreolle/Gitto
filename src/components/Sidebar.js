@@ -3,15 +3,29 @@ import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons'
 
+import { listRepos } from '@/services/httpRequests/requests'
+
 class Sidebar extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isOpen: true
+      isOpen: true,
+      repos: [],
+      orgName: ''
     }
 
     this.toggleMenu = this.toggleMenu.bind(this);
+  }
+
+  componentDidMount() {
+    listRepos().then(res => {
+      const repos = res.data
+      const orgName = res.data[0].owner.login
+      
+      this.setState({ repos })
+      this.setState({ orgName })
+    })
   }
   
   toggleMenu () {
@@ -25,7 +39,7 @@ class Sidebar extends Component {
       <nav className={`sidebar ${(this.state.isOpen ? 'open' : 'close')}`}>
         <div className="sidebar__header">
           <div className="sidebar__header--title">
-            <h2 className="orgName">Nome do Perfil</h2>
+            <h2 className="orgName">{this.state.orgName}</h2>
             <h3 className="subtitle">Projetos</h3>
           </div>
           <div className="sidebar__header--avatar">
@@ -33,45 +47,9 @@ class Sidebar extends Component {
           </div>
         </div>
         <ul className="sidebar__nav">
-            <li>Andreolle de Sousa Dantas 1</li>
-            <li>Pedro de Sousa Dantas</li>
-            <li>Paulo Araujo Dantas</li>
-            <li>Andreolle de Sousa Dantas 1</li>
-            <li>Pedro de Sousa Dantas</li>
-            <li>Paulo Araujo Dantas</li>
-            <li>Andreolle de Sousa Dantas 1</li>
-            <li>Pedro de Sousa Dantas</li>
-            <li>Paulo Araujo Dantas</li>
-            <li>Andreolle de Sousa Dantas 1</li>
-            <li>Pedro de Sousa Dantas</li>
-            <li>Paulo Araujo Dantas</li>
-            <li>Andreolle de Sousa Dantas 1</li>
-            <li>Pedro de Sousa Dantas</li>
-            <li>Paulo Araujo Dantas</li>
-            <li>Andreolle de Sousa Dantas 1</li>
-            <li>Pedro de Sousa Dantas</li>
-            <li>Paulo Araujo Dantas</li>
-            <li>Andreolle de Sousa Dantas 1</li>
-            <li>Pedro de Sousa Dantas</li>
-            <li>Paulo Araujo Dantas</li>
-            <li>Andreolle de Sousa Dantas 1</li>
-            <li>Pedro de Sousa Dantas</li>
-            <li>Paulo Araujo Dantas</li>
-            <li>Andreolle de Sousa Dantas 1</li>
-            <li>Pedro de Sousa Dantas</li>
-            <li>Paulo Araujo Dantas</li>
-            <li>Andreolle de Sousa Dantas 1</li>
-            <li>Pedro de Sousa Dantas</li>
-            <li>Paulo Araujo Dantas</li>
-            <li>Andreolle de Sousa Dantas 1</li>
-            <li>Pedro de Sousa Dantas</li>
-            <li>Paulo Araujo Dantas</li>
-            <li>Andreolle de Sousa Dantas 1</li>
-            <li>Pedro de Sousa Dantas</li>
-            <li>Paulo Araujo Dantas</li>
-            <li>Andreolle de Sousa Dantas 1</li>
-            <li>Pedro de Sousa Dantas</li>
-            <li>Paulo Araujo Dantas</li>
+          {this.state.repos.map(repo =>
+            <li key={ repo.id }>{ repo.name }</li>
+          )}
         </ul>
         <div className="sidebar__actionbar">
           <FontAwesomeIcon onClick={this.toggleMenu} className="sidebar__actionbar--toggleButton" icon={faChevronCircleLeft} />
