@@ -6,7 +6,7 @@ const listRepos = (orgName) => {
 }
 
 const listCommits = (repoName) => {
-    return Http.get(`/orgs/${repoName}/commits`)
+    return Http.get(`/repos/${repoName}/commits`)
 }
 
 export {
