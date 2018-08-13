@@ -44,7 +44,6 @@ class App extends Component {
       <BrowserRouter>
         <div className="app">
             <Sidebar />
-
             <Switch>
               <Route path='/:repoName' component={RepositoryPage}/>
             </Switch>

@@ -22,17 +22,14 @@ class Sidebar extends Component {
 
   componentDidMount() {    
     store.subscribe(() => {
-      const repos = store.getState()
-      const orgName = store.getState()[0].fullName.replace(/\/(.*)/g, '')
-      const orgAvatar = store.getState()[0].ownerAvatar
-
+      const repos = store.getState().listReducer
+      const orgName = repos[0].fullName.replace(/\/(.*)/g, '')
+      const orgAvatar = repos[0].ownerAvatar
+      
       this.setState({ repos })
       this.setState({ orgName })
       this.setState({ orgAvatar })
     })
-  }
-  
-  componentDidUpdate() {
   }
   
   toggleMenu () {
