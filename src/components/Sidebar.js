@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 
-import { listRepos } from '@/services/httpRequests/requests'
+import store from '@/store'
 
 class Sidebar extends Component {
   constructor(props) {
@@ -20,16 +20,19 @@ class Sidebar extends Component {
     this.toggleMenu = this.toggleMenu.bind(this);
   }
 
-  componentDidMount() {
-    listRepos().then(res => {
-      const repos = res.data
-      const orgName = res.data[0].owner.login
-      const orgAvatar = res.data[0].owner.avatar_url
-      
+  componentDidMount() {    
+    store.subscribe(() => {
+      const repos = store.getState()
+      const orgName = store.getState()[0].fullName.replace(/\/(.*)/g, '')
+      const orgAvatar = store.getState()[0].ownerAvatar
+
       this.setState({ repos })
       this.setState({ orgName })
       this.setState({ orgAvatar })
     })
+  }
+  
+  componentDidUpdate() {
   }
   
   toggleMenu () {
@@ -52,7 +55,7 @@ class Sidebar extends Component {
         </div>
         <ul className="sidebar__nav">
           {this.state.repos.map(repo =>
-            <li key={ repo.id }>
+            <li key={ repo.name }>
               <Link to={{ pathname: `/${ repo.name }` }}>
                 { repo.name }
               </Link>
