@@ -30,15 +30,13 @@ class CommitList extends Component {
 			})
 		})
 
-		// listCommits(url, 'page=2').then(res => {
-		// 	if (res.data.length === 0) {
-		// 		this.setState(prevState => ({
-		// 			showMoreBtn: false
-		// 		}))
-		// 	} else {
-		// 		showMoreBtn: true
-		// 	}
-		// })
+		listCommits(url, 'page=2').then(res => {
+			if (res.data.length === 0) {
+				this.setState(prevState => ({
+					showMoreBtn: false
+				}))
+			}
+		})
 	}
 
 	componentWillUpdate(nextProps, nextState) {
