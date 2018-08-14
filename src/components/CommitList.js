@@ -1,19 +1,41 @@
 import React, { Component } from 'react'
+import { listCommits } from '@/services/httpRequests/requests'
+import githubUser from '@/images/gituser.png'
 
 class CommitList extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			commitList: []
+		}
+	}
+	componentDidMount () {
+		const url = this.props.repoURL
+		listCommits(url).then(res => {
+			this.setState({
+				commitList: res.data
+			})
+		})
+	}
 	render() {
+		const commitItem = this.state.commitList.map((item) => (
+			<li className="commit" key={item.sha}>
+				<strong>{item.commit.message}</strong>
+
+				<div className="commit__committer">
+					<div className="commit__committer--avatar">
+						<img src={item.author ? item.author.avatar_url: githubUser} alt=""/>
+						{/* <p>{item.author.login}</p> */}
+					</div>
+					<div className="commit__committer--name">{item.commit.author.name}</div>
+				</div>
+			</li>
+		))
+
 		return (
 			<ul className="commit-list">
-				<li className="commit">
-					<strong>Commit message Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni, quibusdam.</strong>
-
-					<div className="commit__committer">
-						<div className="commit__committer--avatar">
-							<img src="#" alt=""/>
-						</div>
-						<div className="commit__committer--name">Andreolle</div>
-					</div>
-				</li>
+				{ commitItem }	
 			</ul>
 		)
 	}

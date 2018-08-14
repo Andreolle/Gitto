@@ -28,7 +28,7 @@ class RepositoryPage extends Component {
 
 	render() {
 		const repo = this.state.info.map((item) => (
-			<div className="container">
+			<div className="container" key={item.name}>
 				<div className="repository-page__header">
 					<div className="repository-page__header--title">
 						<h1>{item.name}</h1>
@@ -39,7 +39,7 @@ class RepositoryPage extends Component {
 				</div>
 
 				<div className="repository-page__body">
-					<CommitList />
+					<CommitList repoURL={item.fullName} />
 				</div>
 			</div>
 		))
