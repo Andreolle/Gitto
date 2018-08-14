@@ -19,8 +19,8 @@ class RepositoryPage extends Component {
 			})
 		})
 	}
-	componentWillReceiveProps() {
-		const repoName = this.props.url.replace('/', '')
+	componentWillReceiveProps(newProps) {
+		const repoName = newProps.url.replace('/', '')
 		this.setState({
 			info: store.getState().listReducer.filter((list) => list.name === repoName)
 		})
