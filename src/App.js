@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import Sidebar from './components/Sidebar'
 import RepositoryPage from './containers/RepositoryPage'
+import Home from './containers/Home'
 
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Switch
 } from 'react-router-dom'
 
 import { listRepos } from '@/services/httpRequests/requests'
@@ -16,6 +18,10 @@ const routes = [
   {
     path: '/:repoName',
     component: RepositoryPage
+  },
+  {
+    path: '/',
+    component: Home
   }
 ]
 class App extends Component {
@@ -55,11 +61,14 @@ class App extends Component {
         <div className="app">
             <Sidebar />
               {routes.map(({ path, component: RepoPage}) => (
-                <Route
-                  key={path}
-                  path={path}
-                  render={(props) => <RepoPage {...props} url={props.match.url} />}
-                />
+                <Switch>
+                  <Route
+                    key={path}
+                    exact="true"
+                    path={path}
+                    render={(props) => <RepoPage {...props} url={props.match.url} />}
+                  />
+                </Switch>
               ))}
         </div>
       </Router>
