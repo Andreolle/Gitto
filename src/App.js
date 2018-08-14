@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import Sidebar from './components/Sidebar'
 import RepositoryPage from './containers/RepositoryPage'
 import Home from './containers/Home'
+import Howard from './containers/Howard'
+
+import kc from './kc'
 
 import {
   BrowserRouter as Router,
@@ -22,6 +25,10 @@ const routes = [
   {
     path: '/',
     component: Home
+  },
+  {
+    path: '/s/howard',
+    component: Howard
   }
 ]
 class App extends Component {
@@ -52,6 +59,8 @@ class App extends Component {
 
       localStorage.setItem('listRepositories', JSON.stringify(list))
       this.props.dispatch(repoList.list(list))
+
+      kc
     })
   }
 
@@ -59,17 +68,17 @@ class App extends Component {
     return (
       <Router>
         <div className="app">
-            <Sidebar />
-              {routes.map(({ path, component: RepoPage}) => (
-                <Switch>
-                  <Route
-                    key={path}
-                    exact="true"
-                    path={path}
-                    render={(props) => <RepoPage {...props} url={props.match.url} />}
-                  />
-                </Switch>
-              ))}
+          <Sidebar />
+            {routes.map(({ path, component: RepoPage}) => (
+              <Switch>
+                <Route
+                  key={path}
+                  exact
+                  path={path}
+                  render={(props) => <RepoPage {...props} url={props.match.url} />}
+                />
+              </Switch>
+            ))}
         </div>
       </Router>
     );
