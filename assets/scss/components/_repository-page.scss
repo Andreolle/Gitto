@@ -39,6 +39,17 @@
             overflow: auto;
             border: 1px solid $linegray;
             border-top: 0;
+
+            &::-webkit-scrollbar {
+                width: .7em;
+            }
+            &::-webkit-scrollbar-track {
+                @include box-shadow(inset 0 0 6px rgba(0,0,0,0.3));
+            }
+            &::-webkit-scrollbar-thumb {
+              background-color: $subablue;
+              outline: 1px solid slategrey;
+            }
         }
 
         .commit {
