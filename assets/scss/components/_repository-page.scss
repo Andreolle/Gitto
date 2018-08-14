@@ -53,8 +53,8 @@
                 align-items: center;
                 &--avatar {
                     width: 30px;
-                    height: 30px;;
-                    border: 1px solid green;
+                    height: 30px;
+                    border: 1px solid $linegray;
                     margin-right: .5rem;
                     @include border-radius(3px);
                     overflow: hidden;

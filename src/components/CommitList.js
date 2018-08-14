@@ -26,7 +26,6 @@ class CommitList extends Component {
 				<div className="commit__committer">
 					<div className="commit__committer--avatar">
 						<img src={item.author ? item.author.avatar_url: githubUser} alt=""/>
-						{/* <p>{item.author.login}</p> */}
 					</div>
 					<div className="commit__committer--name">{item.commit.author.name}</div>
 				</div>
