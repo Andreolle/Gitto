@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 
 import CounterDisplay from '@/components/CounterDisplay'
 import CommitList from '@/components/CommitList'
-
-import { connect } from 'react-redux'
-import activeItem from '@/actions/activeItem'
 import store from '@/store'
 
 class RepositoryPage extends Component {
@@ -12,44 +9,44 @@ class RepositoryPage extends Component {
 		super(props);
 
 		this.state = {
-			repoInfo: []
+			info: []
 		}
+		
+		store.subscribe(() => {
+			const { repoName } = this.props.match.params
+			this.setState({
+				info: store.getState().listReducer.filter((list) => list.name === repoName)
+			})
+		})
 	}
-	componentDidUpdate () {
-		const { repoName } = this.props.match.params
-		let info = store.getState().listReducer.filter((list) => list.name === repoName)
-		console.log(info)
+	componentWillReceiveProps() {
+		const repoName = this.props.url.replace('/', '')
+		this.setState({
+			info: store.getState().listReducer.filter((list) => list.name === repoName)
+		})
 	}
-	componentDidMount () {
-		// store.subscribe((batata) => {
-		// 	let info = store.getState().listReducer.filter((list) => list.name === "asgard-api-plugin-metrics-mesos")
-		// 	console.log(info)
-		// })
-	}
+
 	render() {
-		return (
-			<div className="repository-page">
-				<div className="container">
-					<div className="repository-page__header">
-						<div className="repository-page__header--title">
-							<h1>Nome do Repositório</h1>
-							<p>Descrição</p>
-						</div>
-
-						<CounterDisplay />						
+		const repo = this.state.info.map((item) => (
+			<div className="container">
+				<div className="repository-page__header">
+					<div className="repository-page__header--title">
+						<h1>{item.name}</h1>
+						<p>{item.description}</p>
 					</div>
 
-					<div className="repository-page__body">
-						<CommitList />
-					</div>
+					<CounterDisplay stars={item.starsCount} forks={item.forkCount} />						
+				</div>
+
+				<div className="repository-page__body">
+					<CommitList />
 				</div>
 			</div>
+		))
+		return (
+			<div className="repository-page">{repo}</div>
 		)
 	}
 }
 
-// export default RepositoryPage;
-
-export default connect(store => {
-  return { repoInfo: store }
-})(RepositoryPage)
+export default RepositoryPage

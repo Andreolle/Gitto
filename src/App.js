@@ -1,14 +1,23 @@
-import React, { Component } from 'react';
-import Sidebar from './components/Sidebar';
-import RepositoryPage from './containers/RepositoryPage';
+import React, { Component } from 'react'
+import Sidebar from './components/Sidebar'
+import RepositoryPage from './containers/RepositoryPage'
 
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom'
 
 import { listRepos } from '@/services/httpRequests/requests'
 
 import { connect } from 'react-redux'
 import repoList from '@/actions/repoList'
 
+const routes = [
+  {
+    path: '/:repoName',
+    component: RepositoryPage
+  }
+]
 class App extends Component {
   componentDidMount() {
     listRepos().then(res => {
@@ -39,16 +48,21 @@ class App extends Component {
       this.props.dispatch(repoList.list(list))
     })
   }
+
   render() {
     return (
-      <BrowserRouter>
+      <Router>
         <div className="app">
             <Sidebar />
-            <Switch>
-              <Route path='/:repoName' component={RepositoryPage}/>
-            </Switch>
+              {routes.map(({ path, component: RepoPage}) => (
+                <Route
+                  key={path}
+                  path={path}
+                  render={(props) => <RepoPage {...props} url={props.match.url} />}
+                />
+              ))}
         </div>
-      </BrowserRouter>
+      </Router>
     );
   }
 }

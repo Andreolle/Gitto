@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCodeBranch, faStar, faEye } from '@fortawesome/free-solid-svg-icons'
+import { faCodeBranch, faStar } from '@fortawesome/free-solid-svg-icons'
 
 class CounterDisplay extends Component {
 	render() {
@@ -9,7 +9,7 @@ class CounterDisplay extends Component {
 			<div className="repository-page__counter">
 				<div className="repository-page__counter--item">
 					<div className="counter">
-							<span>7</span>
+							<span>{this.props.stars}</span>
 							<FontAwesomeIcon icon={faStar} />
 					</div>
 					<p className="description">Stars</p>
@@ -17,18 +17,10 @@ class CounterDisplay extends Component {
 				
 				<div className="repository-page__counter--item">
 					<div className="counter">
-							<span>7</span>
+							<span>{this.props.forks}</span>
 							<FontAwesomeIcon icon={faCodeBranch} />
 					</div>
 					<p className="description">Forks</p>
-				</div>
-				
-				<div className="repository-page__counter--item">
-					<div className="counter">
-							<span>7</span>
-							<FontAwesomeIcon icon={faEye} />
-					</div>
-					<p className="description">Watchers</p>
 				</div>
 			</div>
 		)
