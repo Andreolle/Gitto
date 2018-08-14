@@ -7,9 +7,21 @@ class CommitList extends Component {
 		super(props);
 
 		this.state = {
-			commitList: []
+			commitList: [],
+			commitListNext: [],
+			page: 1,
+			showMoreBtn: true
 		}
+		
+		this.nextPage = this.nextPage.bind(this);
 	}
+
+	nextPage () {
+		this.setState(prevState => ({
+			page: prevState.page+1
+		}))
+	}
+
 	componentDidMount () {
 		const url = this.props.repoURL
 		listCommits(url).then(res => {
@@ -17,7 +29,35 @@ class CommitList extends Component {
 				commitList: res.data
 			})
 		})
+
+		// listCommits(url, 'page=2').then(res => {
+		// 	if (res.data.length === 0) {
+		// 		this.setState(prevState => ({
+		// 			showMoreBtn: false
+		// 		}))
+		// 	} else {
+		// 		showMoreBtn: true
+		// 	}
+		// })
 	}
+
+	componentWillUpdate(nextProps, nextState) {
+		const url = this.props.repoURL
+		let commitList = this.state.commitList
+
+		listCommits(url, `page=${nextState.page}`).then(res => {
+			if (res.data.length !== 0) {
+				res.data.map(e => {
+					commitList.push(e)
+				})
+			} else {
+				this.setState(prevState => ({
+					showMoreBtn: false
+				}))	
+			}
+		})
+	}
+
 	render() {
 		const commitItem = this.state.commitList.map((item) => (
 			<li className="commit" key={item.sha}>
@@ -33,9 +73,13 @@ class CommitList extends Component {
 		))
 
 		return (
-			<ul className="commit-list">
-				{ commitItem }	
-			</ul>
+			<div className="commit-container">
+				<ul className="commit-list">
+					{ commitItem }
+				</ul>
+				
+				<div onClick={this.nextPage} className={`show-more ${!this.state.showMoreBtn ? 'hide' : ''}`}>Ver mais</div>
+			</div>
 		)
 	}
 }

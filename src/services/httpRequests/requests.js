@@ -5,8 +5,8 @@ const listRepos = (orgName) => {
     return Http.get(`/orgs/${org}/repos`)
 }
 
-const listCommits = (repoName) => {
-    return Http.get(`/repos/${repoName}/commits`)
+const listCommits = (repoName, params) => {
+    return Http.get(`/repos/${repoName}/commits?${params}`)
 }
 
 export {
