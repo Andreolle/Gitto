@@ -6,8 +6,8 @@ const listRepos = (orgName) => {
 }
 
 const listCommits = (repoName, params) => {
-    params = params || 'page=1'
-    return Http.get(`/repos/${repoName}/commits?${params}`)
+    params = params || ''
+    return Http.get(`/repos/${repoName}/commits${params}`)
 }
 
 export {

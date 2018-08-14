@@ -30,30 +30,32 @@ class CommitList extends Component {
 			})
 		})
 
-		listCommits(url, 'page=2').then(res => {
+		listCommits(url, '?page=2').then(res => {
 			if (res.data.length === 0) {
 				this.setState(prevState => ({
 					showMoreBtn: false
 				}))
 			}
-		})
+		}).catch(err => console.log(err))
 	}
 
 	componentWillUpdate(nextProps, nextState) {
-		const url = this.props.repoURL
+		const url = nextProps.repoURL
 		let commitList = this.state.commitList
 
-		listCommits(url, `page=${nextState.page}`).then(res => {
-			if (res.data.length !== 0) {
-				res.data.map(e => {
-					commitList.push(e)
-				})
-			} else {
-				this.setState(prevState => ({
-					showMoreBtn: false
-				}))	
-			}
-		})
+		if (this.state.commitList !== nextState.commitList) {
+			listCommits(url, `?page=${nextState.page}`).then(res => {
+				if (res.data.length !== 0) {
+					res.data.map(e => {
+						commitList.push(e)
+					})
+				} else {
+					this.setState(prevState => ({
+						showMoreBtn: false
+					}))	
+				}
+			})
+		}
 	}
 
 	render() {
