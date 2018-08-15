@@ -43,19 +43,17 @@ class CommitList extends Component {
 		const url = nextProps.repoURL
 		let commitList = this.state.commitList
 
-		if (this.state.commitList !== nextState.commitList) {
-			listCommits(url, `?page=${nextState.page}`).then(res => {
-				if (res.data.length !== 0) {
-					res.data.map(e => {
-						commitList.push(e)
-					})
-				} else {
-					this.setState(prevState => ({
-						showMoreBtn: false
-					}))	
-				}
-			})
-		}
+		listCommits(url, `?page=${nextState.page}`).then(res => {
+			if (res.data.length !== 0) {
+				res.data.map(e => {
+					commitList.push(e)
+				})
+			} else {
+				this.setState(prevState => ({
+					showMoreBtn: false
+				}))	
+			}
+		})
 	}
 
 	render() {
