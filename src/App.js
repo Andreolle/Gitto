@@ -4,8 +4,6 @@ import RepositoryPage from './containers/RepositoryPage'
 import Home from './containers/Home'
 import Howard from './containers/Howard'
 
-import kc from './kc'
-
 import {
   BrowserRouter as Router,
   Route,
