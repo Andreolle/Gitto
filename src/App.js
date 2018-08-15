@@ -59,8 +59,6 @@ class App extends Component {
 
       localStorage.setItem('listRepositories', JSON.stringify(list))
       this.props.dispatch(repoList.list(list))
-
-      kc
     })
   }
 
