@@ -3,7 +3,7 @@ import Sidebar from './components/Sidebar'
 import RepositoryPage from './containers/RepositoryPage'
 import Home from './containers/Home'
 import Howard from './containers/Howard'
-import kc from './kc'
+import './kc'
 
 import {
   BrowserRouter as Router,
@@ -67,7 +67,7 @@ class App extends Component {
         <div className="app">
           <Sidebar />
             {routes.map(({ path, component: RepoPage}) => (
-              <Switch>
+              <Switch key={path}>
                 <Route
                   key={path}
                   exact

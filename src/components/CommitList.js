@@ -41,17 +41,23 @@ class CommitList extends Component {
 
 	componentDidUpdate(nextProps, nextState) {
 		const url = nextProps.repoURL
-		let commitList = this.state.commitList
+		
+		let {lastUrlFetched} = this.state.commitList
+
+		if (url!==lastUrlFetched) {
+			return false;
+		}
 
 		listCommits(url, `?page=${nextState.page}`).then(res => {
 			if (res.data.length !== 0) {
-				res.data.map(e => {
+				return res.data.map(e => 
 					this.setState({
+						lastUrlFetched: url,
 						commitList: [e]
 					})
-				})
+				)
 			} else {
-				this.setState(prevState => ({
+				return this.setState(prevState => ({
 					showMoreBtn: false
 				}))	
 			}
